@@ -6,11 +6,11 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/09/30 16:29:31 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:38:23 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t len)
 {

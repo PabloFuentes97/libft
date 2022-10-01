@@ -6,9 +6,11 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/09/26 13:18:38 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:38:09 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_memcmp(void *string1, void *string2, unsigned int len)
 {
