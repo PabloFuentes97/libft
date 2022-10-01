@@ -1,41 +1,28 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/26 12:35:07 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strlen(char *str)
+#include "libft.h"
+
+void	ft_putendl_fd(char *s, int fd)
 {
-    int contador;
+	int	len;
+	int	cont;
 
-    contador = 0;
-    while (str[contador] != '\0')
-        contador++; 
-    return (contador);
-}
-
-void ft_putendl_fd(char *s, int fd)
-{
-    int len;
-    int contador;
-
-    len = ft_strlen(s);
-    contador = 0;
-
-    while (contador < len)
-    {
-        write(fd, &s[contador], 1);
-        contador++;
-    }
-    write(fd, "\n", 1);
-}
-
-int main (void)
-{
-    int fd;
-    char *array;
-    
-    array = "hola";
-    fd = open("file.txt", O_CREAT | O_WRONLY, 0600);
-    ft_putendl_fd(array, fd);
+	len = ft_strlen(s);
+	cont = 0;
+	while (cont < len)
+	{
+		write(fd, &s[cont], 1);
+		cont++;
+	}
+	write(fd, "\n", 1);
 }

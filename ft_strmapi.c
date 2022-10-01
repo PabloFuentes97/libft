@@ -1,56 +1,33 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/27 12:04:18 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strlen(char *str)
+#include "libft.h"
+
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-    int contador;
+	int		s_len;
+	int		cont;
+	char	*string;
 
-    contador = 0;
-    while (str[contador] != '\0')
-        contador++;
-    return (contador);
-}
-
-int ft_toupper(unsigned int p, char c)
-{
-    if (c > 64 && c < 91)
-    {
-        c = c + 32;
-        return (c);
-    }
-    return (c);
-}
-
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
-{
-
-    int s_len;
-    int contador;
-    char *string_nueva;
-
-    s_len = ft_strlen(s);
-    contador = 0;
-    string_nueva = (char*)malloc(sizeof(char) * s_len);
-    while(s[contador] != '\0')
-    {
-        string_nueva[contador] = f(contador, s[contador]);
-        contador++;
-
-    }
-    return (string_nueva);
-}
-
-char func(unsigned int i, char c)
-{
-    return (c + i);
-}
-
-int main (void)
-{
-    char (*pfunction)(unsigned int, char);
-    char *string;
-
-    pfunction = &func;
-    string = "hola";
-    printf("%s", ft_strmapi(string, pfunction));
-
+	s_len = ft_strlen(s);
+	cont = 0;
+	string = (char *)malloc(sizeof(char) * s_len + 1);
+	if (string == NULL)
+		return (NULL);
+	while (s[cont] != '\0')
+	{
+		string[cont] = f(cont, s[cont]);
+		cont++;
+	}
+	string[cont] = '\0';
+	return (string);
 }

@@ -1,61 +1,52 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/28 10:07:17 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strlen(const char *str)
+#include "libft.h"
+
+char	*fill_array(char	const *s1, char	const *s2, char	*array)
 {
-    int contador;
+	int	cont_s;
+	int	cont_join;
 
-    contador = 0;
-    while (str[contador] != '\0')
-        contador++;
-    return (contador);
+	cont_s = 0;
+	cont_join = 0;
+	while (s1[cont_s] != '\0')
+	{
+		array[cont_join] = s1[cont_s];
+		cont_join++;
+		cont_s++;
+	}
+	cont_s = 0;
+	while (s2[cont_s] != '\0')
+	{
+		array[cont_join] = s2[cont_s];
+		cont_join++;
+		cont_s++;
+	}
+	array[cont_join] = '\0';
+	return (array);
 }
 
-char *ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char	const *s1, char	const *s2)
 {
-    int contador1;
-    int contador2;
-    int contador3;
-    int s1_len;
-    int s2_len;
-    char *strjoin;
+	char	*str_join;
+	int		s1_len;
+	int		s2_len;
 
-    contador1 = 0;
-    contador2 = 0;
-    contador3 = 0;
-    s1_len = ft_strlen(s1);
-    s2_len = ft_strlen(s2);
-    strjoin = (char*)malloc(sizeof(char) * (s1_len + s2_len));
-    while (s1[contador1] != '\0')
-    {
-        strjoin[contador3] = s1[contador1];
-        contador3++;
-        contador1++;
-    }
-    while (s2[contador2] != '\0')
-    {
-        strjoin[contador3] = s2[contador2];
-        contador3++;
-        contador2++;
-    }
-    strjoin[contador3] = '\0';
-    return (strjoin);
-}
-
-int main(void)
-{
-    int contador;
-
-    contador = 0;
-    char s1[] = "hola";
-    char s2[] = "buenas";
-    char *s3;
-    s3 = ft_strjoin(s1, s2);
-
-    while (s3[contador] != '\0')
-    {
-        printf("%c", s3[contador]);
-        contador++;
-    }
-    return (0);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	str_join = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
+	if (str_join == NULL)
+		return (NULL);
+	str_join = fill_array(s1, s2, str_join);
+	return (str_join);
 }

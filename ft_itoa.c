@@ -1,95 +1,68 @@
-#include <stdio.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/10/01 17:23:55 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_rev_int_tab(char *tab, int size)
+#include "libft.h"
+
+int	num_len(unsigned int n)
 {
-	int		primer_elemento;
-	int		ultimo_elemento;
-	int		intercambiador;
+	unsigned int	first_block;
+	int				cont;
 
-	primer_elemento = 0;
-	ultimo_elemento = size - 1;
-	while (primer_elemento < ultimo_elemento)
+	first_block = n;
+	cont = 1;
+	while (first_block >= 10)
 	{
-		intercambiador = tab[primer_elemento];
-		tab[primer_elemento] = tab[ultimo_elemento];
-		tab[ultimo_elemento] = intercambiador;
-		primer_elemento++;
-		ultimo_elemento--;
+		first_block = first_block / 10;
+		cont++;
 	}
-    return (tab);
+	return (cont);
 }
 
-int calcular_num_elementos(int n)
+char	*fill_arr(char *array, unsigned int first_block, int n, int len_num)
 {
-    int resto; // %10 coge el resto de cifras
-    int primer_bloque; // /10 coge primera cifra
-    int contador;
-    
-    printf("El número original es: %d\n", n);
-    primer_bloque = n;
-    if (primer_bloque < 0)
-        primer_bloque = primer_bloque * -1;
-    contador = 1;
-    while (primer_bloque > 10)
-    {
-        resto = primer_bloque % 10;
-        primer_bloque = primer_bloque / 10; 
-        contador++;
-        printf("El primer bloque es: %d\n", primer_bloque);
-        printf("El resto es: %d\n", resto);
-    }
-    printf("El número de elementos es: %d\n", contador);
-    if (n < 0)
-        contador++;
-    return (contador);
+	unsigned int	rem;
+
+	if (n < 0)
+	{
+		array[0] = '-';
+	}
+	array[len_num] = '\0';
+	len_num--;
+	while (first_block >= 10)
+	{
+		rem = first_block % 10;
+		first_block = first_block / 10;
+		array[len_num] = rem + '0';
+		len_num--;
+	}
+	array[len_num] = first_block + '0';
+	return (array);
 }
 
-char *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-    int resto; // %10 coge ultima cifra
-    int primer_bloque; // /10 coge primera cifras menos la última, el resto
-    int contador;
-    int num_elementos;
-    char *array;
+	unsigned int	nb;
+	int				num_elem;
+	char			*array;
 
-    n = caso_limite(n);
-    num_elementos = calcular_num_elementos(n);
-    array = (char*)malloc(sizeof(char) * num_elementos);
-    printf("El número original es: %d\n", n);
-    primer_bloque = n;
-    if (primer_bloque < 0)
-        primer_bloque = primer_bloque * -1;
-    contador = 0;
-    while (primer_bloque > 10)
-    {
-        resto = (primer_bloque % 10) + '0';
-        primer_bloque = primer_bloque / 10; 
-        array[contador] = resto;
-        contador++;
-        printf("El primer bloque es: %d\n", primer_bloque);
-        printf("El resto es: %c\n", resto);
-    }
-    array[contador] = primer_bloque + '0';
-    printf("El número de elementos es: %d\n", contador);
-    if (n < 10)
-        array[contador + 1] = 45;
-    array = ft_rev_int_tab(array, num_elementos);
-    return (array);
+	nb = n;
+	if (n < 0)
+		nb = n * -1;
+	num_elem = num_len(nb);
+	if (n < 0)
+		num_elem++;
+	array = (char *)malloc(sizeof(char) * (num_elem + 1));
+	if (array == NULL)
+		return (NULL);
+	array = fill_arr(array, nb, n, num_elem);
+	return (array);
 }
-
-int caso_limite(int n) //comprobar si es un caso límite y cambiar el valor
-{
-    if (n >= -2147483648)
-        n = 147483648;
-    return (n);
-}
-
-int main (void)
-{
-    int n;
-    
-    n = -56436871;
-    printf("El número en caracteres es: %s", ft_itoa(n));
-}
-

@@ -1,27 +1,27 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/26 11:50:23 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 char	*ft_strchr(char *str, int c)
 {
-	int		contador;
-    contador = 0;
+	int		cont;
 
-	while (str[contador] != '\0')
+	cont = 0;
+	while (str[cont] != '\0')
 	{
-		if (str[contador] == c)
-			return (&str[contador]);
-        contador++;
+		if (str[cont] == c)
+			return (&str[cont]);
+		cont++;
 	}
-    if (c == '\0')
-        return (&str[contador]);
+	if (c == '\0')
+		return (&str[cont]);
 	return (0);
-}
-
-int main(void)
-{
-    char *string;
-    int c;
-
-    string = "halas";
-    c = 97;
-    printf("%s", ft_strchr(string, c));
 }

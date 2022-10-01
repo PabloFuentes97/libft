@@ -1,37 +1,37 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/30 13:11:48 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char *ft_substr(char const *s, unsigned int start, size_t len) //s: La string desde la que crear la substring. 
-//start: El índice del caracter en ’s’ desde el que empezar la substring.
-//len: La longitud máxima de la substring.
+#include "libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-    unsigned long int contador;
-    char *substring;
+	size_t	cont;
+	char	*substring;
 
-    contador = 0;
-    substring = (char*)malloc(sizeof(char) * len);
-    while (contador < len)
-    {
-        substring[contador] = s[start];
-        contador++;
-        start++;
-    }
-    substring[contador] = '\0';
-    return (substring);
-}
-
-int main(void)
-{
-    int contador;
-    char *string;
-    char *substring;
-
-    string = "muy buenas";
-    substring = ft_substr(string, 4, 3);
-    contador = 0;
-    while (substring[contador] != '\0')
-    {
-        printf("%c", substring[contador]);
-        contador++;
-    }
+	cont = 0;
+	if (s == NULL || start >= ft_strlen(s))
+		return (ft_calloc(1, 1));
+	if (len > (ft_strlen(s) - start))
+		substring = malloc(sizeof(char) * (ft_strlen(s) - start + 1));
+	else
+		substring = malloc(sizeof(char) * (len + 1));
+	if (substring == NULL)
+		return (NULL);
+	while (cont < len)
+	{
+		substring[cont] = s[start];
+		cont++;
+		start++;
+	}
+	substring[cont] = '\0';
+	return (substring);
 }

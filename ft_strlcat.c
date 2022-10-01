@@ -1,19 +1,32 @@
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size) // quizá esté mal
-{
-	unsigned int	c;
-	unsigned int	dest_len;
-	unsigned int	src_len;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/10/01 17:20:10 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	dest_len = ft_strlen(dest);
-	src_len = ft_strlen(src);
-	c = 0;
-	while ((c < (size - dest_len - 1)) && (src[c] != '\0'))
+#include "libft.h"
+
+size_t	ft_strlcat(char *dst, char *src, size_t size)
+{
+	size_t	dst_len;
+	size_t	cont;
+
+	if (size <= ft_strlen(dst))
+		return (size + ft_strlen(src));
+	dst_len = ft_strlen(dst);
+	cont = 0;
+	while (src[cont] != '\0' && dst_len + 1 < size)
 	{
-		dest[c + dest_len] = src[c];
-		c++;
+		dst[dst_len] = src[cont];
+		dst_len++;
+		cont++;
 	}
-	dest[c + dest_len] = '\0';
-	if (size < dest_len)
-		return (src_len + size);
-	return (dest_len + src_len);
+	dst[dst_len] = '\0';
+	return (dst_len + ft_strlen(&src[cont]));
 }

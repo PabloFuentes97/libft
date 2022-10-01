@@ -1,18 +1,27 @@
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-	unsigned int	contador;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/30 16:46:44 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	contador = 0;
-	while (contador < n && (s1[contador] != '\0' || s2[contador] != '\0'))
+#include "libft.h"
+
+int	ft_strncmp(char *s1, char *s2, size_t n)
+{
+	size_t	cont;
+
+	cont = 0;
+	while (cont < n && (s1[cont] || s2[cont]))
 	{
-		if (s1[contador] == s2[contador])
-		{
-			contador++;
-		}
-		else if (s1[contador] > s2[contador])
-			return (1);
-		else if (s1[contador] < s2[contador])
-			return (-1);
+		if (s1[cont] != s2[cont])
+			return ((unsigned char)s1[cont] - (unsigned char)s2[cont]);
+		cont++;
 	}
 	return (0);
 }

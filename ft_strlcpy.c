@@ -1,12 +1,29 @@
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size) // está mal, corregir
-{
-	unsigned int	contador;
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/10/01 17:17:52 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-	while (src[contador] != '\0' && contador < size - 1)
+#include "libft.h"
+
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
+{
+	size_t	cont;
+
+	cont = 0;
+	if (ft_strlen(dest) == 0 || size == 0)
+		return (ft_strlen(src));
+	while (src[cont] != '\0' && cont < (size - 1))
 	{
-		dest[contador] = src[contador];
-		contador++;
+		dest[cont] = src[cont];
+		cont++;
 	}
-	dest[contador] = '\0';
+	dest[cont] = '\0';
 	return (ft_strlen(src));
 }

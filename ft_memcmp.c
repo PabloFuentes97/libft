@@ -1,29 +1,30 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/26 13:18:38 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_memcmp(void *string1, void *string2, unsigned int len)
+int	ft_memcmp(void *string1, void *string2, unsigned int len)
 {
-    unsigned int contador;
-    unsigned char* p1;
-    unsigned char* p2;
-    
-    contador = 0;
-    p1 = string1;
-    p2 = string2;
-    while (contador < len)
-    {
-        if (p1[contador] == p2[contador])
-        {
-            contador++;
-        }
-        else if (p1[contador] != p2[contador])
-            return (p1[contador] - p2[contador]);
-    }
-    return (0);
-}
+	unsigned int	cont;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-int main(void)
-{
-    char string1[] = "hola buenas";
-    char string2[] = "hola Buenas";
-    printf("%d", ft_memcmp(string1, string2, 6));
+	cont = 0;
+	p1 = string1;
+	p2 = string2;
+	while (cont < len)
+	{
+		if (p1[cont] == p2[cont])
+			cont++;
+		else if (p1[cont] != p2[cont])
+			return (p1[cont] - p2[cont]);
+	}
+	return (0);
 }

@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/09/30 12:29:49 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/01 17:04:17 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_bzero(void *string, size_t n)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*c;
-	size_t	cont;
+	t_list	*new_node;
+	t_list	*head_new;
 
-	c = string;
-	cont = 0;
-	while (cont < n)
+	if (!lst || !f || !del)
+		return (0);
+	new_node = ft_lstnew(f(lst->content));
+	if (new_node == NULL)
+		return (0);
+	head_new = new_node;
+	lst = lst->next;
+	while (lst)
 	{
-		c[cont] = 0;
-		cont++;
+		new_node->next = ft_lstnew(f(lst->content));
+		if (new_node->next == NULL)
+		{
+			ft_lstclear(&head_new, del);
+			return (0);
+		}
+		lst = lst->next;
+		new_node = new_node->next;
 	}
+	new_node->next = NULL;
+	return (head_new);
 }

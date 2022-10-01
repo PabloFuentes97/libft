@@ -1,9 +1,14 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdlib.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/26 12:37:32 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <unistd.h>
 
@@ -34,15 +39,4 @@ void	ft_putnbr_fd(int nb, int fd)
 	{
 		ft_putchar(nb + 48, fd);
 	}
-}
-
-int main (void)
-{
-    int fd;
-    int num;
-    
-    num = -175496;
-    fd = open("file.txt", O_CREAT | O_WRONLY, 0600);
-    ft_putnbr_fd(num, fd);
-    close(fd);
 }

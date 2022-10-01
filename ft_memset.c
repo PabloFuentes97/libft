@@ -1,36 +1,26 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/26 13:15:31 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void *ft_memset(void *string, int c,  unsigned int len)
+void	*ft_memset(void *s, int c, unsigned int len)
 {
-    unsigned int contador;
-    unsigned char* p;
-    
-    contador = 0;
-    p = string;
-    while(contador < len)
-    {
-        p[contador]= (unsigned char)c;
-        contador++;
-    }
-    return (string);
+	unsigned int	cont;
+	unsigned char	*p;
+
+	cont = 0;
+	p = s;
+	while (cont < len)
+	{
+		p[cont] = (unsigned char)c;
+		cont++;
+	}
+	return (s);
 }
-
-int main(void)
-{
-    int contador;
-
-    contador = 0;
-    char string[] = "hola buenas";
-    while (contador < 11)
-    {
-        printf("%c", string[contador]);
-        contador++;
-    }
-    ft_memset(string, 4, sizeof(string));
-    while (contador < 11)
-    {
-        printf("%c", string[contador]);
-        contador++;
-    }
-}
-

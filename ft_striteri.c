@@ -1,49 +1,25 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/27 10:18:43 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_strlen(char *str)
+#include "libft.h"
+
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-    int contador;
+	unsigned int	cont;
 
-    contador = 0;
-    while (str[contador] != '\0')
-        contador++;
-    return (contador);
-}
-
-int ft_toupper(unsigned int p, char c)
-{
-    if (c > 64 && c < 91)
-    {
-        c = c + 32;
-        return (c);
-    }
-    return (c);
-}
-
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
-{
-    int contador;
-
-    contador = 0;
-    while(s[contador] != '\0')
-    {
-        s[contador] = f(contador, s[contador]);
-        contador++;
-    }
-}
-
-char func(unsigned int i, char c)
-{
-    return (c + i);
-}
-
-int main (void)
-{
-    char (*pfunction)(unsigned int, char);
-    char *string;
-
-    pfunction = &func;
-    string = "hola";
-    printf("%s", ft_strmapi(string, pfunction));
-
+	cont = 0;
+	while (s[cont] != '\0')
+	{
+		f(cont, &s[cont]);
+		cont++;
+	}
 }

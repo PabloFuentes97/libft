@@ -1,33 +1,27 @@
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/30 15:02:15 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char	*ft_strrchr(char *str, int c) //busca caracter en un string
+#include "libft.h"
+
+char	*ft_strrchr(char *str, int c)
 {
-	int		contador;
-    int     posicion_caracter;
+	int		cont;
 
-    contador = 0;
-    posicion_caracter = 0;
-
-	while (str[contador] != '\0')
+	cont = ft_strlen(str);
+	while (cont >= 0)
 	{
-		if (str[contador] == c)
-			posicion_caracter = contador;
-        contador++;
+		if (str[cont] == c)
+			return (&str[cont]);
+		cont--;
 	}
-    if (posicion_caracter != 0)
-        return (&str[posicion_caracter]);
-    if (c == '\0')
-        return (&str[contador]);
-
 	return (0);
-}
-
-int main(void)
-{
-    char *string;
-    int c;
-
-    string = "halas";
-    c = 97;
-    printf("%s", ft_strrchr(string, c));
 }

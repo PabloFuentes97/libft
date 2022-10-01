@@ -1,132 +1,134 @@
-#include <stdlib.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
+/*   Updated: 2022/09/30 16:02:03 by pfuentes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int calcular_numero_filas(char const *s, char c) //calcula numero de filas
+#include "libft.h"
+
+char	**make_array2d(char const *s, char c)
 {
-    int contador_filas;
-    int contador;
+	char	**array_2d;
+	int		cont;
+	int		len;
 
-    contador_filas = 0;
-    contador = 0;
-    while (s[contador] != '\0')
-    {
-        if (s[contador] == c)
-            contador_filas++,
-        contador++;
-    }
-    return(contador_filas);
+	cont = 0;
+	len = 0;
+	while (s[cont] == c && s[cont])
+			cont++;
+	while (s[cont])
+	{
+		len++;
+		while (s[cont] != c && s[cont])
+			cont++;
+		while (s[cont] == c && c != 0)
+			cont++;
+	}
+	array_2d = (char **)malloc(sizeof(char *) * (len + 1));
+	return (array_2d);
 }
 
-int calcular_numero_columnas(char const *s, char c, int posicion) //calcula numero de columnas por cada fila
+void	free_array2d(char **array_2d, int j)
 {
-    int contador;
-    int contador_columnas;
-    int numero_maximo;
+	int	i;
 
-    contador = 0;
-    contador_columnas = 0;
-    while (s[posicion] != '\0')
-    {
-        while (s[posicion] != c)
-            contador++;
-    }
-    return (contador);
+	i = 0;
+	while (i < j)
+	{
+		free(array_2d[j]);
+		i++;
+	}
+	array_2d = NULL;
 }
 
-char **inicializar_matriz2d(char const *s, char c) // inicializa la matriz 2d, primero filas y luego columnas
+void	fill_array2d(char **array_2d, char const *s, char c)
 {
-    int posicion;
-    int numero_filas;
-    int numero_columnas;
-    int contador_filas;
-    int contador_columnas;
-    char **matriz_2d;
-    
-    numero_filas = calcular_numero_filas(s, c);
-    contador_filas = 0;
-    contador_columnas = 0;
-    posicion = 0;
+	int		i;
+	int		j;
+	int		word_size;
 
-    matriz_2d = (char**)malloc(sizeof(char*) * numero_filas); //asigna memoria a la matriz 2d, número de filas totales
-    while (contador_filas < numero_filas)
-    {
-        while (s[posicion] != c)
-        {
-            contador_columnas++;
-            posicion++;
-        }
-        matriz_2d[contador_filas] = (char *)malloc(sizeof(char) * contador_columnas); // asigna memoria columna por columna, cuántos elementos hay por fila
-        contador_filas++;
-        posicion++;
-        contador_columnas = 0;
-    }
-    return(matriz_2d);
+	i = 0;
+	j = 0;
+	while (s[i] == c && s[i])
+		i++;
+	while (s[i])
+	{
+		word_size = 0;
+		while (s[i + word_size] != c && s[i + word_size])
+			word_size++;
+		array_2d[j] = ft_substr(s, i, word_size);
+		if (!array_2d[j])
+		{
+			free_array2d(array_2d, j);
+			break ;
+		}
+		i = i + word_size;
+		j++;
+		while (s[i] == c && s[i])
+			i++;
+	}
+	array_2d[j] = NULL;
 }
 
-char **ft_split(char const *s, char c) //rellena la matriz inicializada, formada en la función anterior
+char	**ft_split(char const *s, char c)
 {
-    int posicion;
-    int contador_filas;
-    int contador_columnas;
-    int numero_filas;
-    int numero_columnas;
-    char **matriz_2d;
+	char	**array_2d;
 
-    posicion = 0;
-    contador_filas = 0;
-    contador_columnas = 0;
-    numero_filas = calcular_numero_filas(s, c);
-    matriz_2d = inicializar_matriz2d(s , c);
-    while (contador_filas < numero_filas) //rellenar la matriz 2d
-    {
-        while (contador_columnas < numero_columnas)
-        {
-            while(s[posicion] != c)
-            {
-                matriz_2d[contador_filas][contador_columnas] = s[posicion]; //asigna a cada elemento un valor
-                contador_columnas++;
-                posicion++;
-            }
-            posicion++;
-            contador_columnas = 0;
-        }
-        contador_filas++;
-    }
-    return (matriz_2d);
+	if (!s)
+		return (NULL);
+	array_2d = make_array2d(s, c);
+	if (!array_2d)
+		return (NULL);
+	fill_array2d(array_2d, s, c);
+	if (!array_2d)
+		return (NULL);
+	return (array_2d);
 }
 
-int main(void)
+/*int	main(void)
 {
-    char **matriz_2d;
-    char *array;
-    char del;
-    int contador_filas;
-    int contador_columnas;
-    int numero_filas;
-    int numero_columnas;
-    int posicion;
+	char 	s[] = "\0aa\0bbb";
+	char	c = '\0';
+	char	**array_2d;
+	int		row_number;
+	int		cont_row;
+	int		cont_col;
+	int		cont;
 
-    array = "Hola, que tal, adios";
-    del = ',';
-    matriz_2d = ft_split(array, del);
-    contador_filas = 0;
-    contador_columnas = 0;
-    posicion = 0;
-    numero_filas = calcular_numero_filas(array, del);
-    while (contador_filas < numero_filas) //rellenar la matriz 2d
-    {
-        while (contador_columnas < numero_columnas)
-        {
-            while(array[posicion] != del)
-            {
-                printf("%d", matriz_2d[contador_filas][contador_columnas]); //asigna a cada elemento un valor
-                contador_columnas++;
-                posicion++;
-            }
-            posicion++;
-            contador_columnas = 0;
-        }
-        contador_filas++;
-    }
-    return (0);
+	array_2d = ft_split(s, c);
+
+	
+	row_number = rows_number(s, c);
+	cont_row = 0;
+	cont = 0;
+	if (s[0] == c)
+	{
+		cont++;
+		while(s[cont] == c)
+			cont++;
+	}
+	while (cont_row < row_number)
+	{
+		cont_col = 0;
+		while (cont_col <= (cols_number(s, c, cont_row)))
+		{
+			if (s[cont] != c)
+			{
+				printf("%c", array_2d[cont_row][cont_col]);
+				cont++;
+			}
+			cont_col++;
+		}
+		printf("\n");
+		while (s[cont] == c)
+			cont++; //hacer un while hasta que no haya demilitador consecutivo
+		cont_row++;
+	}
 }
+*/
