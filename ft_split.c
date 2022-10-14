@@ -6,13 +6,13 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/10/01 17:39:31 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/14 11:03:22 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**make_array2d(char const *s, char c)
+static char	**make_array2d(char const *s, char c)
 {
 	char	**array_2d;
 	int		cont;
@@ -34,7 +34,7 @@ char	**make_array2d(char const *s, char c)
 	return (array_2d);
 }
 
-void	free_array2d(char **array_2d, int j)
+static void	free_array2d(char **array_2d, int j)
 {
 	int	i;
 
@@ -47,7 +47,7 @@ void	free_array2d(char **array_2d, int j)
 	array_2d = NULL;
 }
 
-void	fill_array2d(char **array_2d, char const *s, char c)
+static void	fill_array2d(char **array_2d, char const *s, char c)
 {
 	int		i;
 	int		j;

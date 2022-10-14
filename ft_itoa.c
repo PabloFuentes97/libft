@@ -6,13 +6,13 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/10/01 17:23:55 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/14 10:48:33 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	num_len(unsigned int n)
+static int	num_len(unsigned int n)
 {
 	unsigned int	first_block;
 	int				cont;
@@ -27,7 +27,7 @@ int	num_len(unsigned int n)
 	return (cont);
 }
 
-char	*fill_arr(char *array, unsigned int first_block, int n, int len_num)
+static char	*fill_arr(char *array, unsigned int first_block, int n, int len_num)
 {
 	unsigned int	rem;
 

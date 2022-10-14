@@ -6,7 +6,7 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/10/01 17:38:23 by pfuentes         ###   ########.fr       */
+/*   Updated: 2022/10/01 19:44:44 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memmove(void *dest, const void *src, size_t len)
 	char_dest = (char *)dest;
 	char_src = (char *)src;
 	cont = 0;
-	if (dest == NULL)
+	if (dest == NULL && src == NULL)
 		return (NULL);
 	if (char_dest > char_src)
 	{
