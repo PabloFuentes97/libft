@@ -6,14 +6,17 @@
 /*   By: pfuentes <pfuentes@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 13:03:09 by pfuentes          #+#    #+#             */
-/*   Updated: 2022/09/30 10:15:01 by pfuentes         ###   ########.fr       */
+/*   Updated: 2023/03/02 09:45:09 by pfuentes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
+	new->prev = NULL;
 	new->next = *lst;
+	if (*lst != NULL)
+		(*lst->prev) = new;
 	*lst = new;
 }
